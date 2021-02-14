@@ -9,7 +9,7 @@ import UIKit
 
 class MyPizzaTableViewController: UITableViewController {
     @IBOutlet weak var labelBay: UILabel!
-    var pizzaMenuList = [pizzaMenu(namePizza: "1assorti", imagePizza: "1assorti.jpg"), pizzaMenu(namePizza: "bavarskaya", imagePizza: "bavarskaya.jpg"), pizzaMenu(namePizza: "gavayskaya", imagePizza: "gavayskaya.jpg"), pizzaMenu(namePizza: "margarita", imagePizza: "margarita.jpg"), pizzaMenu(namePizza: "myunhenskaya", imagePizza: "myunhenskaya.jpg"), pizzaMenu(namePizza: "pepperoni", imagePizza: "pepperoni.jpg"), pizzaMenu(namePizza: "pitstsa-chetyre-sezona", imagePizza: "pitstsa-chetyre-sezona.jpg")]
+    var pizzaMenuList = [pizzaMenu(namePizza: "Асорті", imagePizza: "Асорті.jpg", pricePizza: 9.99 ), pizzaMenu(namePizza: "Баварська", imagePizza: "Баварська.jpg", pricePizza: 9.99), pizzaMenu(namePizza: "Гавайська", imagePizza: "Гавайська.jpg", pricePizza: 9.99), pizzaMenu(namePizza: "Маргаріта", imagePizza: "Маргаріта.jpg", pricePizza: 9.99), pizzaMenu(namePizza: "Мюнхенська", imagePizza: "Мюнхенська.jpg", pricePizza: 9.99), pizzaMenu(namePizza: "Папероні", imagePizza: "Папероні.jpg", pricePizza: 9.99), pizzaMenu(namePizza: "Чотири сизони", imagePizza: "Чотири сизони.jpg", pricePizza: 9.99)]
     
 
     var pizzaBay = [pizzaMenu]()
@@ -37,8 +37,8 @@ class MyPizzaTableViewController: UITableViewController {
         cell.thumbanailImageView.layer.cornerRadius = 32.5
         cell.thumbanailImageView.clipsToBounds = true
         cell.nameLabel.text = pizzaMenuList[indexPath.row].namePizza
-        
-        cell.accessoryType = self.pizzawantToBuy[indexPath.row] ? .checkmark : .none
+        cell.typeLabel.text = String(pizzaMenuList[indexPath.row].pricePizza) + " $"
+    
         
         
 
@@ -63,16 +63,10 @@ class MyPizzaTableViewController: UITableViewController {
           // present second alert controler
           self.present(alertC, animated: true, completion: nil)
         }
-        let wantToBuyTitle = self.pizzawantToBuy[indexPath.row] ? "Не хочу покпать 🍕" : "Хочу купить 🍕"
-        let wantToBuy = UIAlertAction(title: wantToBuyTitle, style: .default) { (action) in
-            let cell = tableView.cellForRow(at: indexPath)
-            self.pizzawantToBuy[indexPath.row] = !self.pizzawantToBuy[indexPath.row]
-            cell?.accessoryType = self.pizzawantToBuy[indexPath.row] ? .checkmark : .none
-        }
+     
         let cansel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         ac.addAction(call)
         ac.addAction(cansel)
-        ac.addAction(wantToBuy)
         present(ac, animated: true, completion: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }

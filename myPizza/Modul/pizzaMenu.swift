@@ -10,4 +10,6 @@ import Foundation
 struct pizzaMenu {
     var namePizza: String
     var imagePizza: String
+    var pricePizza: Double
+   
 }
